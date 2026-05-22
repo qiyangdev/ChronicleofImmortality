@@ -91,6 +91,12 @@ enum Realm: String, CaseIterable, Codable, Identifiable, Comparable {
         return realms[nextIndex]
     }
 
+    nonisolated var previous: Realm? {
+        let realms = Realm.allCases
+        guard let index = realms.firstIndex(of: self), index > realms.startIndex else { return nil }
+        return realms[realms.index(before: index)]
+    }
+
     nonisolated var isFinal: Bool {
         next == nil
     }
